@@ -14,6 +14,7 @@ public class Kello {
     private long loppuAika = 0;
     private boolean kaynnissa = false;
     
+    //test
     public void aloita() {
         lahtoAika = System.currentTimeMillis();
         kaynnissa = true;
