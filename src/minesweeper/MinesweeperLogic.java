@@ -19,7 +19,11 @@ public class MinesweeperLogic {
     private int ruutujenMaara;
     private Scanner lukija;
     private MinesweeperGUI gui;
-
+/*
+     * Luo oikean kokoisen ristikon ja tallentaa mittasuhteet muuta käyttöä varten.
+     * @param   korkeus Ristikon korkeus
+     * "param   leveys Ristikon leveys
+     */
     public MinesweeperLogic(int korkeus, int leveys) {
         grid = new String[korkeus][leveys];
         this.korkeus = korkeus;
@@ -28,11 +32,18 @@ public class MinesweeperLogic {
         lukija = new Scanner(System.in);
 
     }
-
+/*
+     * Luo graafisen käyttöliittymän
+     */
     public void luoGui() {
         gui = new MinesweeperGUI(ruutujenMaara, korkeus, leveys);
     }
-
+/*
+     * Antaa Ruutu-luokan olioille oikeat arvot gridistä
+     * 
+     * @see Minesweeper.MinesweeperGUI#setRuutu
+     * @see Minesweeper.Ruutu
+     */
     public void fillGui() {
         
         for (int i = 0; i < grid.length; i++) {
@@ -42,14 +53,33 @@ public class MinesweeperLogic {
             }
         }
     }
-    
+    /*
+     * Palauttaa ruudukon
+     * 
+     * @return grid
+     */
     public String[][] getGrid() {
             return grid;
+            
     }
+    /*
+     * Palauttaa GUIn
+     * 
+     * @return gui;
+     */
     public MinesweeperGUI getGui(){
         return gui;
     }
-
+    /*
+     * Määrittää numeron koordinaateilla määritettyyn lokeroon gridissa lokeroita
+     * ympäröivien miinojen perusteella.
+     * 
+     * @param coord1    y-koordinaatti
+     * @param coord2    x-koordinaatti
+     * @param laskuri   Tallentaa ympäröivien miinojen määrän.
+     * 
+     * @return tulos    Palauttaa ympäröivien miinojen määrän.
+     */
     public String maaritaNumero(int coord1, int coord2) {
         int laskuri = 0;
         if (grid[coord1][coord2].contains("*")) {
@@ -73,6 +103,12 @@ public class MinesweeperLogic {
             return tulos;
         }
     }
+    /*
+     * Täyttää ruudukon numeroilla.
+     * 
+     * @see Minesweeper.MinesweeperLogic#maaritaNumero
+     * @see Minesweeper.MinesweeperLogic#setNumber
+     */
 
     public void fillGrid() {
         for (int i = 0; i < grid.length; i++) {
@@ -83,6 +119,11 @@ public class MinesweeperLogic {
             }
         }
     }
+    /*
+     * Täyttää ruudukon nollilla, sillä NULL-arvoisia ruutuja ei voi käsitellä.
+     *
+     * @see Minesweeper.MinesweeperLogic#setNumber
+     */
 
     public void fillWithZeros() {
         for (int i = 0; i < grid.length; i++) {
@@ -91,10 +132,21 @@ public class MinesweeperLogic {
             }
         }
     }
+    
+    /*
+     * Asettaa koordinaateilla määriteltyyn ruutuun annetun luvun.
+     */
 
     public void setNumber(int coord1, int coord2, String luku) {
         grid[coord1][coord2] = luku;
     }
+    /*
+     * Asettaa koordinaateilla määriteltyyn ruutuun miinan. Palauttaa true, jos 
+     * asettaminen onnistui, muuten false.
+     * 
+     * @return true     Jos miinan asettaminen onnistui.
+     * @return false    Jos miinan asettaminen epäonnistui.
+     */
 
     public boolean setMine(int coord1, int coord2) {
         if (grid[coord1][coord2].contains("*")) {
@@ -104,6 +156,19 @@ public class MinesweeperLogic {
             return true;
         }
     }
+    
+    /*
+     * Arpoo vähintään lukumäärän verran koordinaatteja ja asettaa ruudukkoon miinat.
+     * Mikäli arvotussa koordinaatissa oli jo miina, arpoo uuden. Mikäli miinojen
+     * lukumäärä on suurempi kuin ruutujen, pyytää antamaan uuden lukumäärän.
+     * 
+     * @param lukumaara     Miinojen lukumäärä.
+     * @param laskuri       Säilyttää jo asettetujen miinojen määrän.
+     * @param coord1        y-koordinaatti
+     * @param coord2        x-koordinaatti
+     * 
+     * @see Minesweeper.MinesweeperLogic#setMine
+     */
 
     public void arvoMiinat(int lukumaara) {
         int laskuri = 0;
@@ -121,6 +186,12 @@ public class MinesweeperLogic {
             }
         }
     }
+    
+    /* 
+     * Palauttaa ruudukosta merkkijonoesityksen.
+     * 
+     * @return tulos       Palauttaa merkkijonoesityksen.
+     */
 
     public String toString() {
         String tulos = "";
