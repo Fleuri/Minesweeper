@@ -21,11 +21,20 @@ public class MinesweeperGUI extends JFrame{
        private JButton nappula1;
        private JButton nappula2;
        private Kello kello;
-       private Ruutu ruutu;
+       
+    /*
+        * Matriisi, joka säilyttää graafiset ruudut
+        * 
+        * @see Minesweeper.Ruutu
+        */
     
-    private int numerointi = 0;
     public static Ruutu[][] ruudut;
     
+    /*
+     * Alustaa graafisen ruudukon, luo Ruutu-oliot
+     * 
+     * @see Minesweeper.Ruutu;
+     */
     
     public MinesweeperGUI(int ruutujenMaara, int korkeus, int leveys) {
         
@@ -45,6 +54,12 @@ public class MinesweeperGUI extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+    /*
+     * Asettaa graafiseen ruudukkoon oikean arvon
+     * 
+     * @see Minesweeper.Ruutu#setArvo
+     */
+    
     public void setRuutu(int i,int j, String numero) {
            ruudut[i][j].setArvo(numero);
    }
